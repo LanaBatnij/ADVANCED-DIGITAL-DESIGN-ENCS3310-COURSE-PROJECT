@@ -1,0 +1,317 @@
+//Lana Batnij //1200308
+
+module Counter_n_bit(go,clk,reset,out);	  
+	input go,clk,reset;
+	output reg[4:0] out;  
+	integer i;
+	 
+	always @(posedge clk or posedge reset)
+		begin
+		if(go==1)begin
+			for(i=0;i<18;i=i+1)begin
+				out[i]=out[i]+5'b00001;
+				$monitor("the counter value %d",out[i]);
+			end
+		end
+	end
+		
+endmodule  
+
+//_____________________________________________________________________
+
+module Traffic_Light(clk,reset,count_out,Hs1,Hs2,Fs1,Fs2);	  
+	parameter Green=2'b00,Yellow_g=2'b01,Red=2'b10,Yellow_r=2'b11;
+	input clk,reset;	  
+	input [4:0] count_out;
+	output reg Hs1,Hs2,Fs1,Fs2;
+	integer i;
+	
+	Counter_n_bit My_Counter(1,clk,reset,count_out);
+	
+	always @(posedge clk or posedge reset)
+		begin
+			for(i=0;i<18;i=i+1)
+				begin
+					if(count_out[i]==0)
+						begin
+							Hs1=Red;
+							Hs2=Red; 
+							Fs1=Red;
+							Fs2=Red;
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end
+					else if(count_out[i]==1)
+						begin
+							Hs1=Yellow_r;
+							Hs2=Yellow_r; 
+							Fs1=Red;
+							Fs2=Red;
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end		 
+					else if(count_out[i]==2)
+						begin
+							Hs1=Green;
+							Hs2=Green; 
+							Fs1=Red;
+							Fs2=Red;
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end		 
+					else if(count_out[i]==3)
+						begin
+							Hs1=Green;
+							Hs2=Yellow_g; 
+							Fs1=Red;
+							Fs2=Red; 
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end
+					else if(count_out[i]==4)
+						begin
+							Hs1=Green;
+							Hs2=Red; 
+							Fs1=Red;
+							Fs2=Red;
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end	  
+					else if(count_out[i]==5)
+						begin
+							Hs1=Yellow_g;
+							Hs2=Red; 
+							Fs1=Red;
+							Fs2=Red;
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end	 
+					else if(count_out[i]==6)
+						begin
+							Hs1=Red;
+							Hs2=Red; 
+							Fs1=Red;
+							Fs2=Red;
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end	 
+					else if(count_out[i]==7)
+						begin
+							Hs1=Red;
+							Hs2=Red; 
+							Fs1=Yellow_r;
+							Fs2=Yellow_r; 
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end	
+					else if(count_out[i]==8)
+						begin
+							Hs1=Red;
+							Hs2=Red; 
+							Fs1=Green;
+							Fs2=Green;
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end		
+					else if(count_out[i]==9)
+						begin
+							Hs1=Red;
+							Hs2=Red; 
+							Fs1=Green;
+							Fs2=Yellow_g;
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end	  
+						
+					else if(count_out[i]==10)
+						begin
+							Hs1=Red;
+							Hs2=Red; 
+							Fs1=Green;
+							Fs2=Red;
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end	 
+					else if(count_out[i]==11)
+						begin
+							Hs1=Red;
+							Hs2=Red; 
+							Fs1=Yellow_g;
+							Fs2=Yellow_r;	
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end
+					else if(count_out[i]==12)
+						begin
+							Hs1=Red;
+							Hs2=Red; 
+							Fs1=Red;
+							Fs2=Green;
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end
+					else if(count_out[i]==13)
+						begin
+							Hs1=Red;
+							Hs2=Red; 
+							Fs1=Red;
+							Fs2=Yellow_g;  
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end	  
+						
+					else if(count_out[i]==14)
+						begin
+							Hs1=Red;
+							Hs2=Red; 
+							Fs1=Red;
+							Fs2=Red; 
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end	
+					else if(count_out[i]==15)
+						begin
+							Hs1=Red;
+							Hs2=Yellow_r; 
+							Fs1=Red;
+							Fs2=Red;
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end	 
+				    else if(count_out[i]==16)
+						begin
+							Hs1=Red;
+							Hs2=Green; 
+							Fs1=Red;
+							Fs2=Red; 
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end	
+					else if(count_out[i]==17)
+						begin
+							Hs1=Red;
+							Hs2=Yellow_r; 
+							Fs1=Red;
+							Fs2=Red; 
+							$display("THE VALUES OF THE OF THE Highway1=%d,Highway2=%d,Farm1=%d, Farm2=%d",Hs1,Hs2,Fs1,Fs2);
+						end
+						
+				end 
+				
+		end
+		
+endmodule  
+
+//____________________________________________________________________________________
+
+module reference_And_Analysiser(clk,reset,count_out,Hs1,Hs2,Fs1,Fs2,mem_Hs1,mem_Hs2,mem_Fs1,mem_Fs2);
+	parameter Green=2'b00,Yellow_g=2'b01,Red=2'b10,Yellow_r=2'b11; 	
+	
+	input clk,Hs1,Hs2,Fs1,Fs2;
+	input [4:0] count_out;	  
+	integer i;					
+	
+	Counter_n_bit counter1(1,clk,reset,count_out);	
+	Traffic_Light mySystem(clk,reset,count_out,Hs1,Hs2,Fs1,Fs2);
+	
+    output reg [1:0] mem_Hs1[0:17] ={Red,Yellow_r,Green,Green,Green,Yellow_g
+	,Red,Red,Red,Red,Red,Red,Red,Red,Red,Red,Red,Red};	
+	
+	output reg [1:0] mem_Hs2[0:17] ={Red,Yellow_r,Green,Yellow_g,Red,Red
+	,Red,Red,Red,Red,Red,Red,Red,Red,Red,Yellow_r,Green,Yellow_g};
+	
+	output reg [1:0] mem_Fs1[0:17] ={Red,Red,Red,Red,Red,Red
+	,Red,Yellow_r,Green,Green,Green,Yellow_g,Red,Red,Red,Red,Red,Red};
+	
+	output reg [1:0] mem_Fs2[0:17] ={Red,Red,Red,Red,Red,Red
+	,Red,Yellow_r,Green,Yellow_g,Red,Yellow_r,Green,Yellow_g,Red,Red,Red,Red};	
+	
+	for(i=0;i<18;i=i+1)
+		begin
+			if(Hs1==mem_Hs1[i])
+				$display("THE VALUSE OF THE FIRST HIGHWAY ARE TRUE %d",Hs1[i]);
+			else 
+				$display("THE VALUSE OF THE FIRST HIGHWAY ARE FALSE %d",Hs1[i]); 
+		end
+		
+	for(i=0;i<18;i=i+1)
+		begin
+			if(Hs2==mem_Hs2[i])
+				$display("THE VALUSE OF THE SECOND HIGHWAY ARE TRUE %d",Hs2[i]); 
+			else 
+				$display("THE VALUSE OF THE SECOND HIGHWAY ARE FALSE %d",Hs2[i]); 
+		end	  
+	for(i=0;i<18;i=i+1)
+		begin
+			if(Fs1==mem_Fs1[i])
+				$display("THE VALUSE OF THE FIRST FARM ARE TRUE %d ",Fs1[i]); 
+			else
+				$display("THE VALUSE OF THE FIRST FARM ARE FALSE %d" ,Fs1[i]); 
+		end				   
+	for(i=0;i<18;i=i+1)
+		begin
+			if(Fs2==mem_Fs2[i])
+				$display("THE VALUSE OF THE SECOND FARM ARE TRUE %d" ,Fs2[i]); 
+			else 
+				$display("THE VALUSE OF THE SECOND FARM ARE FALSE %d" ,Fs2[i]); 
+		end
+												   
+//assign data = mem[address];
+												   
+endmodule  
+
+
+//____________________________________________________________________________________
+
+module System_TB;//the generator module inside the Testbench 
+	reg go,clk,reset,count_out;
+	wire Hs1,Hs2,Fs1,Fs2;
+	integer i;
+	
+	Counter_n_bit counter1(go,clk,reset,count_out);	
+	Traffic_Light mySystem(clk,reset,count_out,Hs1,Hs2,Fs1,Fs2);
+	
+	always
+		begin 
+			repeat(200);
+			#5s clk=~clk;
+		end  
+	initial
+		begin	
+			for(i=0;i<18;i=i+1)
+				begin 
+					if((i%2!=0)&(i!=17))
+						begin  
+							#2s clk=~clk;
+						end	
+					else if(i==0)
+						begin 
+							#1s clk=~clk;
+						end	
+					else if(i==2)
+						begin 
+							#30s clk=~clk;
+						end
+					else if(i==4)
+						begin 
+							#10s clk=~clk;
+						end	
+					else if(i==6)
+						begin 
+							#1s clk=~clk;
+						end
+					else if(i==8)
+						begin 
+							#15s clk=~clk;
+						end
+					else if(i==10)
+						begin 
+							#5s clk=~clk;
+						end
+					else if(i==12)
+						begin 
+							#10s clk=~clk;
+						end
+					else if(i==14)
+						begin 
+							#1s clk=~clk;
+						end	 
+					else if(i==16)
+						begin 
+							#15s clk=~clk;
+						end
+					else if(i==17)
+						begin 
+							#3s clk=~clk;
+						end
+						
+				end
+				
+		end
+		
+endmodule 
+
+//_____________________________________________________________________________
